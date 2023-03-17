@@ -8,15 +8,18 @@ namespace Executor
 {
     static class Program
     {
+        public static Executor exec;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
-        {
+       {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Executor());
+            exec = new Executor();
+            Application.Run(exec);
         }
     }
 }

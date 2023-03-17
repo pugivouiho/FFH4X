@@ -25,6 +25,7 @@ namespace Executor
         }
         private void Executor_Load(object sender, EventArgs e)
         {
+            // start server
             ws.Start();
             ws.AddWebSocketService<WebSocket>("/");
 
@@ -36,14 +37,71 @@ namespace Executor
             syntaxHighlighter.KeywordStyle = new TextStyle(new SolidBrush(Color.FromArgb(204,153,204)), null, FontStyle.Regular);
             syntaxHighlighter.FunctionsStyle = new TextStyle(new SolidBrush(Color.FromArgb(99, 148, 197)), null, FontStyle.Regular);
             ScriptBox.SyntaxHighlighter = syntaxHighlighter;
+
+            // create directories
+            if (!Directory.Exists(Application.StartupPath + "\\scripts"))
+                Directory.CreateDirectory(Application.StartupPath + "\\scripts");
+            if (!Directory.Exists(Application.StartupPath + "\\autoexec"))
+                Directory.CreateDirectory(Application.StartupPath + "\\autoexec");
         }
 
-        private void Loadstring(string script)
+        public void Loadstring(string script)
         {
             ws.WebSocketServices.Broadcast(Encoding.ASCII.GetBytes(script));
         }
 
         #region UI Events
+
+        private void Executor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ws.Stop();
+        }
+
+        #region Scripts List
+
+        private void UpdateScripts()
+        {
+            DirectoryInfo dir = new DirectoryInfo(Application.StartupPath + "\\scripts");
+            FileInfo[] files = dir.GetFiles();
+            Scripts.Items.Clear();
+            foreach (FileInfo file in files)
+            {
+                Scripts.Items.Add(file.Name);
+            }
+        }
+
+        private void updateScripts_Tick(object sender, EventArgs e)
+        {
+            if (!Directory.Exists(Application.StartupPath + "\\scripts"))
+                Directory.CreateDirectory(Application.StartupPath + "\\scripts");
+            DirectoryInfo dir = new DirectoryInfo(Application.StartupPath + "\\scripts");
+            FileInfo[] files = dir.GetFiles();
+            var items = Scripts.Items;
+
+            if (files.Length == 0)
+                Scripts.Items.Clear();
+            else if (items.Count != files.Length)
+                UpdateScripts();
+            else
+                for (int i = 0; i < files.Length; i++)
+                    if (items[i].ToString() != files[i].Name)
+                    {
+                        UpdateScripts();
+                        break;
+                    }
+        }
+
+        private void Scripts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                String file = File.ReadAllText($"{Application.StartupPath}\\scripts\\{Scripts.Items[Scripts.SelectedIndex]}");
+                ScriptBox.Text = file;
+            }
+            catch { }
+        }
+
+        #endregion
 
         #region Bottom Bar
 
@@ -90,6 +148,19 @@ namespace Executor
             }
         }
 
+        public Options options = new Options();
+        public ScriptHub scriptHub = new ScriptHub();
+
+        private void Options_Click(object sender, EventArgs e)
+        {
+            options.Show();
+        }
+
+        private void ScriptHub_Click(object sender, EventArgs e)
+        {
+            scriptHub.Show();
+        }
+
         #endregion
 
         #region Top Bar
@@ -120,6 +191,7 @@ namespace Executor
             if (button != null)
             {
                 button.FlatAppearance.BorderColor = Color.FromArgb(60, 60, 60);
+                button.NotifyDefault(false);
             }
         }
 
@@ -129,6 +201,7 @@ namespace Executor
             if (button != null)
             {
                 button.FlatAppearance.BorderColor = Color.FromArgb(134, 134, 134);
+                button.NotifyDefault(false);
             }
         }
 
@@ -138,6 +211,7 @@ namespace Executor
             if (button != null)
             {
                 button.FlatAppearance.BorderColor = Color.FromArgb(22, 83, 145);
+                button.NotifyDefault(false);
             }
         }
 
@@ -147,6 +221,7 @@ namespace Executor
             if (button != null)
             {
                 button.FlatAppearance.BorderColor = Color.FromArgb(134, 134, 134);
+                button.NotifyDefault(false);
             }
         }
 
@@ -185,7 +260,12 @@ namespace Executor
         {
             if (e.Data == "autoexec")
             {
-                base.Sessions.Broadcast(Encoding.ASCII.GetBytes("print('WELCOME!!')"));
+                try {
+                    if (Directory.Exists(Application.StartupPath + "\\autoexec"))
+                        foreach (string file in Directory.GetFiles(Application.StartupPath + "\\autoexec"))
+                            base.Sessions.Broadcast(Encoding.ASCII.GetBytes(File.ReadAllText(file)));
+                }
+                catch { }
             }
             else if (e.Data.StartsWith("print "))
             {

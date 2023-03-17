@@ -34,7 +34,6 @@ namespace Executor
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Executor));
             this.Execute = new System.Windows.Forms.Button();
-            this.Attach = new System.Windows.Forms.Button();
             this.Clear = new System.Windows.Forms.Button();
             this.Open = new System.Windows.Forms.Button();
             this.ExecuteFile = new System.Windows.Forms.Button();
@@ -46,13 +45,14 @@ namespace Executor
             this.Exit = new System.Windows.Forms.Button();
             this.Minimize = new System.Windows.Forms.Button();
             this.Scripts = new System.Windows.Forms.ListBox();
-            this.Logo = new System.Windows.Forms.PictureBox();
             this.ScriptBox = new FastColoredTextBoxNS.FastColoredTextBox();
             this.ofd = new System.Windows.Forms.OpenFileDialog();
             this.sfd = new System.Windows.Forms.SaveFileDialog();
+            this.updateScripts = new System.Windows.Forms.Timer(this.components);
+            this.Logo = new System.Windows.Forms.PictureBox();
             this.Top.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ScriptBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
             this.SuspendLayout();
             // 
             // Execute
@@ -68,7 +68,6 @@ namespace Executor
             this.Execute.Name = "Execute";
             this.Execute.Size = new System.Drawing.Size(91, 33);
             this.Execute.TabIndex = 2;
-            this.Execute.TabStop = false;
             this.Execute.Text = "Execute";
             this.Execute.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.Execute.UseVisualStyleBackColor = false;
@@ -77,28 +76,6 @@ namespace Executor
             this.Execute.MouseEnter += new System.EventHandler(this.Button_Enter);
             this.Execute.MouseLeave += new System.EventHandler(this.Button_Leave);
             this.Execute.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Button_Up);
-            // 
-            // Attach
-            // 
-            this.Attach.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.Attach.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.Attach.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(70)))), ((int)(((byte)(102)))));
-            this.Attach.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(61)))), ((int)(((byte)(77)))));
-            this.Attach.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Attach.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.Attach.ForeColor = System.Drawing.Color.White;
-            this.Attach.Location = new System.Drawing.Point(609, 316);
-            this.Attach.Name = "Attach";
-            this.Attach.Size = new System.Drawing.Size(91, 33);
-            this.Attach.TabIndex = 3;
-            this.Attach.TabStop = false;
-            this.Attach.Text = "Attach";
-            this.Attach.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
-            this.Attach.UseVisualStyleBackColor = false;
-            this.Attach.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button_Down);
-            this.Attach.MouseEnter += new System.EventHandler(this.Button_Enter);
-            this.Attach.MouseLeave += new System.EventHandler(this.Button_Leave);
-            this.Attach.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Button_Up);
             // 
             // Clear
             // 
@@ -113,7 +90,6 @@ namespace Executor
             this.Clear.Name = "Clear";
             this.Clear.Size = new System.Drawing.Size(91, 33);
             this.Clear.TabIndex = 4;
-            this.Clear.TabStop = false;
             this.Clear.Text = "Clear";
             this.Clear.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.Clear.UseVisualStyleBackColor = false;
@@ -136,7 +112,6 @@ namespace Executor
             this.Open.Name = "Open";
             this.Open.Size = new System.Drawing.Size(91, 33);
             this.Open.TabIndex = 5;
-            this.Open.TabStop = false;
             this.Open.Text = "Open File";
             this.Open.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.Open.UseVisualStyleBackColor = false;
@@ -159,7 +134,6 @@ namespace Executor
             this.ExecuteFile.Name = "ExecuteFile";
             this.ExecuteFile.Size = new System.Drawing.Size(91, 33);
             this.ExecuteFile.TabIndex = 6;
-            this.ExecuteFile.TabStop = false;
             this.ExecuteFile.Text = "Execute File";
             this.ExecuteFile.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.ExecuteFile.UseCompatibleTextRendering = true;
@@ -183,7 +157,6 @@ namespace Executor
             this.Save.Name = "Save";
             this.Save.Size = new System.Drawing.Size(91, 33);
             this.Save.TabIndex = 7;
-            this.Save.TabStop = false;
             this.Save.Text = "Save File";
             this.Save.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.Save.UseVisualStyleBackColor = false;
@@ -206,10 +179,10 @@ namespace Executor
             this.ScriptHub.Name = "ScriptHub";
             this.ScriptHub.Size = new System.Drawing.Size(91, 33);
             this.ScriptHub.TabIndex = 8;
-            this.ScriptHub.TabStop = false;
             this.ScriptHub.Text = "Script Hub";
             this.ScriptHub.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.ScriptHub.UseVisualStyleBackColor = false;
+            this.ScriptHub.Click += new System.EventHandler(this.ScriptHub_Click);
             this.ScriptHub.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button_Down);
             this.ScriptHub.MouseEnter += new System.EventHandler(this.Button_Enter);
             this.ScriptHub.MouseLeave += new System.EventHandler(this.Button_Leave);
@@ -228,10 +201,10 @@ namespace Executor
             this.Options.Name = "Options";
             this.Options.Size = new System.Drawing.Size(91, 33);
             this.Options.TabIndex = 9;
-            this.Options.TabStop = false;
             this.Options.Text = "Options";
             this.Options.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.Options.UseVisualStyleBackColor = false;
+            this.Options.Click += new System.EventHandler(this.Options_Click);
             this.Options.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button_Down);
             this.Options.MouseEnter += new System.EventHandler(this.Button_Enter);
             this.Options.MouseLeave += new System.EventHandler(this.Button_Leave);
@@ -259,7 +232,7 @@ namespace Executor
             this.Title.Name = "Title";
             this.Title.Size = new System.Drawing.Size(127, 15);
             this.Title.TabIndex = 0;
-            this.Title.Text = "Websocket X - v1.0.0b";
+            this.Title.Text = "Websocket X - v1.1.0b";
             this.Title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.Title.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Movable);
             // 
@@ -276,7 +249,6 @@ namespace Executor
             this.Exit.Name = "Exit";
             this.Exit.Size = new System.Drawing.Size(21, 21);
             this.Exit.TabIndex = 11;
-            this.Exit.TabStop = false;
             this.Exit.Text = "X";
             this.Exit.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.Exit.UseCompatibleTextRendering = true;
@@ -301,7 +273,6 @@ namespace Executor
             this.Minimize.Name = "Minimize";
             this.Minimize.Size = new System.Drawing.Size(21, 21);
             this.Minimize.TabIndex = 12;
-            this.Minimize.TabStop = false;
             this.Minimize.Text = "_";
             this.Minimize.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.Minimize.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
@@ -321,23 +292,12 @@ namespace Executor
             this.Scripts.ForeColor = System.Drawing.Color.White;
             this.Scripts.FormattingEnabled = true;
             this.Scripts.HorizontalScrollbar = true;
-            this.Scripts.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.Scripts.ItemHeight = 15;
             this.Scripts.Location = new System.Drawing.Point(679, 37);
             this.Scripts.Name = "Scripts";
             this.Scripts.Size = new System.Drawing.Size(119, 270);
-            this.Scripts.TabIndex = 11;
-            // 
-            // Logo
-            // 
-            this.Logo.BackgroundImage = global::Executor.Properties.Resources.icon;
-            this.Logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Logo.Location = new System.Drawing.Point(5, 2);
-            this.Logo.Name = "Logo";
-            this.Logo.Size = new System.Drawing.Size(25, 25);
-            this.Logo.TabIndex = 13;
-            this.Logo.TabStop = false;
-            this.Logo.Click += new System.EventHandler(this.Logo_Click);
+            this.Scripts.TabIndex = 15;
+            this.Scripts.SelectedIndexChanged += new System.EventHandler(this.Scripts_SelectedIndexChanged);
             // 
             // ScriptBox
             // 
@@ -393,6 +353,22 @@ namespace Executor
             // 
             this.sfd.Filter = "Script Files|*.lua;*.txt";
             // 
+            // updateScripts
+            // 
+            this.updateScripts.Enabled = true;
+            this.updateScripts.Tick += new System.EventHandler(this.updateScripts_Tick);
+            // 
+            // Logo
+            // 
+            this.Logo.BackgroundImage = global::Executor.Properties.Resources.icon;
+            this.Logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Logo.Location = new System.Drawing.Point(5, 2);
+            this.Logo.Name = "Logo";
+            this.Logo.Size = new System.Drawing.Size(25, 25);
+            this.Logo.TabIndex = 13;
+            this.Logo.TabStop = false;
+            this.Logo.Click += new System.EventHandler(this.Logo_Click);
+            // 
             // Executor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -408,7 +384,6 @@ namespace Executor
             this.Controls.Add(this.ExecuteFile);
             this.Controls.Add(this.Open);
             this.Controls.Add(this.Clear);
-            this.Controls.Add(this.Attach);
             this.Controls.Add(this.Execute);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -416,20 +391,21 @@ namespace Executor
             this.MaximizeBox = false;
             this.Name = "Executor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "WS Executor";
+            this.Text = "Executor";
+            this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Executor_FormClosing);
             this.Load += new System.EventHandler(this.Executor_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Movable);
             this.Top.ResumeLayout(false);
             this.Top.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ScriptBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
         private System.Windows.Forms.Button Execute;
-        private System.Windows.Forms.Button Attach;
         private System.Windows.Forms.Button Clear;
         private System.Windows.Forms.Button Open;
         private System.Windows.Forms.Button ExecuteFile;
@@ -445,6 +421,7 @@ namespace Executor
         private FastColoredTextBoxNS.FastColoredTextBox ScriptBox;
         private System.Windows.Forms.OpenFileDialog ofd;
         private System.Windows.Forms.SaveFileDialog sfd;
+        private System.Windows.Forms.Timer updateScripts;
     }
 }
 
