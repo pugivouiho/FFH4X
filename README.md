@@ -4,15 +4,13 @@ A Roblox "executor", created using the Synapse X websocket library and a C# webs
 
 ## How to use
 
-> The URLs are still unavailable, I will upload a release on GitHub on March 17th.
+To use the client, place the [script](https://github.com/game-hax/Roblox-Websocket-Executor/releases/latest/download/client_release.lua) in your exploit's (I have only tested this using Synapse X) "autoexec" directory, and whenever you join a game in Roblox, it will start the client, which will try to connect to the server.
 
-To use the client, place the [script]() in your exploit's (I have only tested this using Synapse X) "autoexec" directory, and whenever you join a game in Roblox, it will start the client, which will try to connect to the server.
-
-To use the server, download the [executor's ZIP]() onto your computer, extract it, and run the executable. It will start the server, and it will allow you to execute scripts.
+To use the server, download the [executor's ZIP](https://github.com/game-hax/Roblox-Websocket-Executor/releases/latest/download/server_release.zip) onto your computer, extract it, and run the executable. It will start the server, and it will allow you to execute scripts.
 
 ### Demonstration
 
-> Demonstration will also be available March 17th.
+https://user-images.githubusercontent.com/120275751/225953612-1b6de800-0373-416d-b3d0-c0699ecb2061.mp4
 
 ## Further explanation
 
